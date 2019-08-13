@@ -9,8 +9,6 @@ RUN apt-get update && \
     rm -rf /var/cache/apt/* && \
     rm -rf /var/lib/apt/lists/*
 
-COPY vpn-slice-1d45bd2e978fa4350b9746b74289972a083dbd80.zip /vpn-slice.zip
-RUN pip3 install /vpn-slice.zip
 COPY run.sh /run.sh
 RUN chmod 0755 /run.sh
 
