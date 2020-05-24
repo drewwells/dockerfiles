@@ -1,5 +1,7 @@
 #!/bin/bash -xe
 
+CODE:=${CODE:-"push"}
+
 echo "Putting ssh keys in place"
 mkdir -p /root/.ssh
 echo "${SSH_PUB}" > /root/.ssh/authorized_keys
@@ -29,9 +31,7 @@ echo "UseDNS no" >> /etc/ssh/sshd_config
 # #tail -n +2 "$FILE" > "$FILE.tmp" && mv "$FILE.tmp" "$FILE"
 
 echo "Starting openconnect!"
-#echo "Starting openconect"
-#(echo "${PASSWORD}"; echo "push") | /usr/sbin/openconnect --verbose --disable-ipv6 --passwd-on-stdin ${OPTIONS[@]} -s "${SCRIPT[@]}" "${SERVER}"
-(echo "${PASSWORD}"; echo "push") | /usr/sbin/openconnect --verbose --disable-ipv6 --passwd-on-stdin ${OPTIONS[@]} "${SERVER}"
+(echo "${PASSWORD}"; echo "${CODE}") | /usr/sbin/openconnect --verbose --disable-ipv6 --passwd-on-stdin ${OPTIONS[@]} "${SERVER}"
 echo "Openconnect stopped echo $@"
 sleep 60
 echo "Done sleeping"
